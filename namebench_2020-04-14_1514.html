@@ -1,0 +1,1405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>namebench: 2020-04-14 15:14:11.866430</title>
+  <style type="text/css">
+    
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #bbb;
+  background-image: -moz-linear-gradient(0% 100% 90deg, #e5e5e5, #666, #e5e5e5 99%);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e5), to(#bbb), color-stop(.1,#666));
+}
+
+
+td {
+  font-size: x-small;
+}
+
+
+#container {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 985px;
+  background-color: #f5f5f5;
+  padding: 0.5em;
+  padding-top: 1px;
+  border: 2px solid #666;
+  border-radius: .6em;
+  -moz-border-radius: .6em;
+  -webkit-border-radius: .6em;
+}
+
+h1 {
+  color: #00CC33;
+  font-size: 75px;
+  text-shadow: 3px 3px #eee;
+  padding-top: 4px;
+  margin: 0;
+}
+
+h2 {
+  padding-top: 1em;
+  clear:  both;
+  font-size: 1em;
+}
+
+h3 {
+  font-size: 0.8em;
+  padding-top:  0;
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+h5.faster {
+  font-size:  30px;
+  font-style: italic;
+  color: #009911;
+  margin: 0;
+  padding-top: 4px;
+}
+
+
+#nsdetails {
+  display: block;
+  background-color:  #C2CFF1;
+  border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
+  padding-left:  3px;
+  padding-bottom: 3px;
+  padding-right:  3px;
+  margin-left: 0.25em;
+}
+
+table#nstable {
+  width:  100%;
+  border-collapse:  collapse;
+  font-size: small;
+}
+
+#nstable tr {
+  vertical-align:  top;
+}
+
+#nstable td {
+  font-size: small;
+}
+
+#nstable td.name_cell {
+  font-size: x-small;
+}
+
+#nstable td.hostname_cell {
+  font-size: x-small;
+}
+
+
+.ip {
+  margin-left: 1em;
+  font-weight: bold;
+  font-family: monospace;
+  border: 1px solid #999;
+  background-color: #f5f5f5;
+  width: 10em;
+  padding: 1px;
+  color: #000;
+}
+
+ul.warnings {
+  padding:  0;
+  margin:  0;
+  margin-left: 0.em;
+  list-style-position:  inside;
+}
+.warnings li {
+}
+#nstable td {
+  padding:  2px;
+  border-right:  1px solid #C2CFF1;
+}
+
+.even {
+  background-color: #fff
+}
+.odd {
+  background-color: #ebeff9;
+}
+
+.unhealthy_host {
+    background-color: #FFD6D8;
+    border-bottom: 1px solid #990000;
+    border-top: 1px solid #990000;
+}
+
+.primary_row {
+  font-weight: bold;
+  background-color: #FFFFEE;
+  border-top: 1px solid #EEEE00;
+  border-bottom: 1px solid #EEEE00;
+}
+
+.disabled {
+  background-color:  #333;
+  border-bottom: 1px solid #666;
+  color: #fff;
+}
+
+.disabled A { 
+  color: #fff;
+}
+
+.disabled A:visited {
+  color: #e5e5e5;
+}
+
+.greybox {
+  border:  1px solid #999;
+  border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
+  padding:  1em;
+  height:  11em;
+  background-color:  #fff;
+}
+
+#big_summary {
+  display: inline-table;
+  float:  left;
+  text-align:  center;
+  width: 24em;
+}
+
+#recommended_config {
+  float: right;
+  display:  inline-table;
+}
+
+#recommended_config table {
+  margin-top: 1em;
+}
+
+#recommended_config td {
+  font-size: medium;
+}
+
+.rec_name {
+  margin-left:  8px;
+  display:  inline;
+  color:  #999;
+}
+
+.section {
+  margin-left: 0.25em;
+  padding: 1em;
+  background-color:  #fff;
+  max-width: 910px;
+}
+
+.config {
+  background-color:  #fff;
+}
+.configtable {
+  font-size: 10px;
+}
+
+.configtable tr {
+  border:  9px solid #f00;
+}
+
+#nstable thead td {
+  font-weight:  bold;
+  font-size: x-small;
+}
+
+h2:before {
+  color:  #555;
+  content:  '\25BA';
+  padding-right:  0.25em;
+}
+
+
+input[type=text] {
+  color: #000;
+}
+
+.normal .error_count {
+  background-color: #900;
+  color: #fff;
+}
+
+.version {
+  text-align: right;
+  font-size: x-small;
+  color: #ccc;
+  clear: both;
+}
+
+/* links with tooltips */
+a.info {
+    position:relative;
+    z-index:24;
+    color: #000;
+    text-decoration:none
+}
+.disabled a.info {
+    color: #fff;
+}
+
+a.info:hover {z-index:25; }
+a.info span {display: none}
+a.info:hover span {
+    display:block;
+    position:absolute;
+    top:2em; left:2em; width:15em;
+    border:1px solid #0cf;
+    background-color:#cff; color:#000;
+    text-align: center
+}
+
+#notice {
+  font-size: small;
+  text-align: center;
+  background-color: #ffa;
+  border: 1px solid #cc7;
+}
+  </style>
+</head>
+<body>
+
+<div id="container">
+
+<div class="version">namebench 1.5-DEVEL</div>
+
+
+<div id="big_summary" class="greybox">
+	<h4><strong>Google Public DNS</strong> is</h4>
+
+	<h1>11.8%</h1><h5 class="faster">Faster</h5>
+	<h4>than USR28-92.220.228.70</h4>
+
+</div>
+
+<div id="recommended_config" class="greybox">
+	<h4>Recommended configuration (fastest + nearest)</h4>
+	<table>
+	
+	<tr>
+	  <td>Primary Server</td>
+    <td><div class="ip">8.8.8.8</div></td><td class="rec_name">Google Public DNS</td>
+	</tr>
+
+	<tr>
+	  <td>Secondary Server</td>
+    <td><div class="ip">1.1.1.3</div></td><td class="rec_name">USR12-1.1.1.3</td>
+	</tr>
+
+	<tr>
+	  <td>Tertiary Server</td>
+    <td><div class="ip">1.0.0.3</div></td><td class="rec_name">USR13-1.0.0.3</td>
+	</tr>
+
+  </table>
+</div>
+
+
+<h2>Tested DNS Servers</h2>
+
+<div id="nsdetails">
+<table id="nstable">
+<thead>
+<tr>
+  <td nowrap="nowrap">IP</td>
+  <td>Descr.</td>
+  <td nowrap="nowrap">Hostname</td>
+  <td nowrap="nowrap">Avg (ms)</td>
+  <td nowrap="nowrap">Diff</td>
+	<td nowrap="nowrap">Min</td>
+	<td nowrap="nowrap">Max</td>
+  <td nowrap="nowrap">TO</td>
+  <td nowrap="nowrap">NX</td>
+  <td>Notes</td>
+</tr>
+</thead>
+
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=8.8.8.8" class="info">8.8.8.8</td>
+  <td class="name_cell">Google Public DNS</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns.google" class="info">dns.google<span>162.210.195.111 81.171.22.4 </span></a></td>
+  <td>69.53</td>
+  <td>11.8%</td>
+  <td>24.7</td>
+  <td>1418.2</td>
+  <td >0</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.207.206</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.65, 104.244.42.129</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li>Replica of Google Public DNS (2) [8.8.4.4]</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.21.164</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=92.220.228.70" class="info">92.220.228.70<span>0.0.0</span></td>
+  <td class="name_cell">USR28-92.220.228.70</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns-site-b.altibox.no" class="info">dns-site-b.altibox.no<span>203e9047df3d0867 </span></a></td>
+  <td>77.75</td>
+  <td></td>
+  <td>29.2</td>
+  <td>1864.8</td>
+  <td >0</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.65</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.211.4</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.22.174</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=109.247.114.4" class="info">109.247.114.4<span>0.0.0</span></td>
+  <td class="name_cell">USR29-109.247.114.4</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns-site-a.altibox.no" class="info">dns-site-a.altibox.no<span>aa28b5fe0460cfa4 </span></a></td>
+  <td>78.10</td>
+  <td>-0.5%</td>
+  <td>29.2</td>
+  <td>3250.0</td>
+  <td class="error_count">1</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.65</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.207.196</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.21.142</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=1.1.1.2" class="info">1.1.1.2</td>
+  <td class="name_cell">USR10-1.1.1.2</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=1.1.1.2" class="info">1.1.1.2<span>OSL </span></a></td>
+  <td>78.57</td>
+  <td>-1.1%</td>
+  <td>17.5</td>
+  <td>1877.8</td>
+  <td >0</td>
+  <td>41</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.207.238</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li>Replica of SYS1-1.0.0.1 [1.0.0.1]</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li>Replica of USR12-1.1.1.3 [1.1.1.3]</li>
+      
+      <li>Replica of USR13-1.0.0.3 [1.0.0.3]</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.20.36</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=208.67.222.222" class="info">208.67.222.222</td>
+  <td class="name_cell">OpenDNS (2)</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=resolver1.opendns.com" class="info">resolver1.opendns.com<span>r1.cph1 r2.cph1 r5.cph1 </span></a></td>
+  <td>86.86</td>
+  <td>-10.5%</td>
+  <td>23.8</td>
+  <td>3250.0</td>
+  <td class="error_count">1</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.211.142</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5a45f.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li>Replica of OpenDNS [208.67.220.220]</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.207.196</a></li>
+      
+      <li>Replica of USR7-208.67.220.222 [208.67.220.222]</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193, 104.244.42.129</a></li>
+      
+      <li>Replica of USR6-208.67.222.220 [208.67.222.220]</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=45.90.28.186" class="info">45.90.28.186</td>
+  <td class="name_cell">USR30-45.90.28.186</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns1.nextdns.io" class="info">dns1.nextdns.io</a></td>
+  <td>92.47</td>
+  <td>-15.9%</td>
+  <td>42.8</td>
+  <td>2049.4</td>
+  <td >0</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.168.238</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.17.100</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193, 104.244.42.1</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google-analytics.com appears incorrect: 0.0.0.0</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=156.154.71.1" class="info">156.154.71.1</td>
+  <td class="name_cell">UltraDNS (2)</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=rdns2.ultradns.net" class="info">rdns2.ultradns.net<span>auth1.sesto1.prod.ultradns.net auth2.sesto1.prod.ultradns.net </span></a></td>
+  <td>100.27</td>
+  <td>-22.5%</td>
+  <td>23.2</td>
+  <td>3250.0</td>
+  <td class="error_count">6</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193, 104.244.42.65</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 173.194.73.147, 173.194.73.104, 173.194.73.99, 173.194.73.106, 173.194.73.105, 173.194.73.103</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=156.154.70.1" class="info">156.154.70.1</td>
+  <td class="name_cell">UltraDNS</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=rdns1.ultradns.net" class="info">rdns1.ultradns.net<span>auth1.nlams1.prod.ultradns.net auth2.nlams1.prod.ultradns.net </span></a></td>
+  <td>104.82</td>
+  <td>-25.8%</td>
+  <td>36.3</td>
+  <td>3250.0</td>
+  <td class="error_count">8</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.1, 104.244.42.193</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.22.100</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.22.46</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=8.20.247.20" class="info">8.20.247.20</td>
+  <td class="name_cell">USR15-8.20.247.20</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=ns2.recursive.dnsbycomodo.com" class="info">ns2.recursive.dnsbycomodo.com</a></td>
+  <td>106.69</td>
+  <td>-27.1%</td>
+  <td>46.8</td>
+  <td>1340.4</td>
+  <td >0</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193, 104.244.42.65</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.23.14</a></li>
+      
+      <li>Replica of USR14-8.26.56.26 [8.26.56.26]</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.20.228</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=185.121.177.177" class="info">185.121.177.177</td>
+  <td class="name_cell">USR20-185.121.177.177</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=anyone.anyqa.st" class="info">anyone.anyqa.st</a></td>
+  <td>106.97</td>
+  <td>-27.3%</td>
+  <td>21.7</td>
+  <td>3250.0</td>
+  <td class="error_count">2</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.211.132</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5a45f.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.207.238</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193, 104.244.42.1</a></li>
+      
+      <li>Replica of USR21-169.239.202.202 [169.239.202.202]</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=149.112.112.112" class="info">149.112.112.112<span>Q9-P-6.0</span></td>
+  <td class="name_cell">USR23-149.112.112.112</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=rpz-public-resolver1.rrdns.pch.net" class="info">rpz-public-resolver1.rrdns.pch.net<span>res110.ams.rrdns.pch.net res300.ams.rrdns.pch.net res210.ams.rrdns.pch.net </span></a></td>
+  <td>113.72</td>
+  <td>-31.6%</td>
+  <td>48.3</td>
+  <td>3250.0</td>
+  <td class="error_count">1</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193, 104.244.42.65</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.21.228</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.16.174</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=64.6.65.6" class="info">64.6.65.6</td>
+  <td class="name_cell">USR25-64.6.65.6</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=recpubns2.nstld.net" class="info">recpubns2.nstld.net<span>nnn1-stk4 </span></a></td>
+  <td>121.62</td>
+  <td>-36.1%</td>
+  <td>24.9</td>
+  <td>3250.0</td>
+  <td class="error_count">2</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.211.132</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.207.238</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.1, 104.244.42.129</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=64.6.64.6" class="info">64.6.64.6</td>
+  <td class="name_cell">USR24-64.6.64.6</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=recpubns1.nstld.net" class="info">recpubns1.nstld.net<span>nnn1-ams3 </span></a></td>
+  <td>122.37</td>
+  <td>-36.5%</td>
+  <td>49.6</td>
+  <td>3250.0</td>
+  <td class="error_count">1</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.17.78</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.129, 104.244.42.65</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.16.196</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=45.90.30.186" class="info">45.90.30.186</td>
+  <td class="name_cell">USR31-45.90.30.186</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns2.nextdns.io" class="info">dns2.nextdns.io</a></td>
+  <td>130.91</td>
+  <td>-40.6%</td>
+  <td>60.2</td>
+  <td>2822.8</td>
+  <td >0</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.17.100</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.198.46</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193, 104.244.42.129</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google-analytics.com appears incorrect: 0.0.0.0</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=77.88.8.1" class="info">77.88.8.1<span>PowerDNS Recursor 4.0.8 (built Dec 11 2017 10:39:35 by root@4351f9921268)</span></td>
+  <td class="name_cell">USR26-77.88.8.1</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=secondary.dns.yandex.ru" class="info">secondary.dns.yandex.ru<span>man1-0088-man-yadns-main-29410.gencfg-c.yandex.net man1-0331-man-yadns-main-29410.gencfg-c.yandex.net man1-3201-man-yadns-main-29410.gencfg-c.yandex.net man2-0377-man-yadns-main-29410.gencfg-c.yandex.net </span></a></td>
+  <td>173.01</td>
+  <td>-55.1%</td>
+  <td>32.0</td>
+  <td>3250.0</td>
+  <td class="error_count">10</td>
+  <td>47</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.65, 104.244.42.1</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 64.233.162.99, 64.233.162.106, 64.233.162.104, 64.233.162.105, 64.233.162.103, 64.233.162.147</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 173.194.73.102, 173.194.73.100, 173.194.73.101, 173.194.73.139, 173.194.73.113, 173.194.73.138</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li>windowsupdate.microsoft.com.: Timeout</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=77.88.8.8" class="info">77.88.8.8<span>PowerDNS Recursor 4.0.8 (built Dec 11 2017 10:39:35 by root@4351f9921268)</span></td>
+  <td class="name_cell">USR27-77.88.8.8</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns.yandex.ru" class="info">dns.yandex.ru<span>man1-5876-man-yadns-main-29410.gencfg-c.yandex.net man2-6756-371-man-yadns-main-29410.gencfg-c.yandex.net man2-0377-man-yadns-main-29410.gencfg-c.yandex.net man1-1817-man-yadns-main-29410.gencfg-c.yandex.net </span></a></td>
+  <td>183.47</td>
+  <td>-57.6%</td>
+  <td>30.8</td>
+  <td>3250.0</td>
+  <td class="error_count">9</td>
+  <td>51</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.129</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 64.233.163.105, 64.233.163.147, 64.233.163.99, 64.233.163.103, 64.233.163.106, 64.233.163.104</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 173.194.220.113, 173.194.220.139, 173.194.220.100, 173.194.220.102, 173.194.220.138, 173.194.220.101</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=176.103.130.130" class="info">176.103.130.130</td>
+  <td class="name_cell">USR8-176.103.130.130</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=176-103-130-130.dns.adguard.com" class="info">176-103-130-130.dns.adguard.com</a></td>
+  <td>192.67</td>
+  <td>-59.6%</td>
+  <td>114.7</td>
+  <td>2390.9</td>
+  <td >0</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.10.14</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.10.68</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.129, 104.244.42.65</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google-analytics.com appears incorrect: 0.0.0.0</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=176.103.130.131" class="info">176.103.130.131</td>
+  <td class="name_cell">USR9-176.103.130.131</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=176-103-130-131.dns.adguard.com" class="info">176-103-130-131.dns.adguard.com</a></td>
+  <td>193.14</td>
+  <td>-59.7%</td>
+  <td>115.8</td>
+  <td>3250.0</td>
+  <td class="error_count">1</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.11.4</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.65, 104.244.42.193</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.12.142</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google-analytics.com appears incorrect: 0.0.0.0</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=216.146.36.36" class="info">216.146.36.36<span>unbound 1.6.8</span></td>
+  <td class="name_cell">DynGuide (2)</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=rdns.dynect.net" class="info">rdns.dynect.net<span>hivecast-234-usewr.as15135.net </span></a></td>
+  <td>196.32</td>
+  <td>-60.4%</td>
+  <td>114.7</td>
+  <td>1547.6</td>
+  <td >0</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193, 104.244.42.65</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.3.100</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li>Replica of DynGuide [216.146.35.35]</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.6.206</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=9.9.9.9" class="info">9.9.9.9<span>Q9-P-6.0</span></td>
+  <td class="name_cell">USR22-9.9.9.9</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns9.quad9.net" class="info">dns9.quad9.net<span>res310.fra.rrdns.pch.net res500.fra.rrdns.pch.net res200.fra.rrdns.pch.net res300.fra.rrdns.pch.net </span></a></td>
+  <td>199.89</td>
+  <td>-61.1%</td>
+  <td>36.8</td>
+  <td>3250.0</td>
+  <td class="error_count">9</td>
+  <td>40</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"NXDOMAIN_hijacking"_mean?">No answer (NXDOMAIN): static.ak.fbcdn.net.</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">liveupdate.symantecliveupdate.com appears incorrect: symantecliveupdate.5A45F.edgecastdns.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.paypal.com is hijacked: www.glb.paypal.com</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">windowsupdate.microsoft.com is hijacked: windowsupdate.redir.update.microsoft.com.nsatc.net</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.207.46</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 172.217.18.100</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.1, 104.244.42.129</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.facebook.com appears incorrect: star-mini.c10r.facebook.com</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=1.1.1.3" class="info">1.1.1.3</td>
+  <td class="name_cell">USR12-1.1.1.3</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=1.1.1.3" class="info">1.1.1.3</a></td>
+  <td>158.63</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of USR10-1.1.1.2 [1.1.1.2]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=1.0.0.3" class="info">1.0.0.3</td>
+  <td class="name_cell">USR13-1.0.0.3</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=1.0.0.3" class="info">1.0.0.3</a></td>
+  <td>160.42</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of USR10-1.1.1.2 [1.1.1.2]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=1.0.0.1" class="info">1.0.0.1</td>
+  <td class="name_cell">SYS1-1.0.0.1</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=one.one.one.one" class="info">one.one.one.one</a></td>
+  <td>161.33</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>A backup DNS server for this system</li>
+      
+      <li>Slower replica of USR10-1.1.1.2 [1.1.1.2]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=1.0.0.2" class="info">1.0.0.2</td>
+  <td class="name_cell">USR11-1.0.0.2</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=1.0.0.2" class="info">1.0.0.2</a></td>
+  <td>192.62</td>
+  <td></td>
+  <td>19.5</td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of USR13-1.0.0.3 [1.0.0.3]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=169.239.202.202" class="info">169.239.202.202</td>
+  <td class="name_cell">USR21-169.239.202.202</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=anytwo.anyqa.st" class="info">anytwo.anyqa.st</a></td>
+  <td>201.38</td>
+  <td></td>
+  <td>23.4</td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of USR20-185.121.177.177 [185.121.177.177]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=8.8.4.4" class="info">8.8.4.4</td>
+  <td class="name_cell">Google Public DNS (2)</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=" class="info"></a></td>
+  <td>204.00</td>
+  <td></td>
+  <td>26.5</td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of Google Public DNS [8.8.8.8]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=208.67.222.220" class="info">208.67.222.220</td>
+  <td class="name_cell">USR6-208.67.222.220</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=resolver3.opendns.com" class="info">resolver3.opendns.com</a></td>
+  <td>209.99</td>
+  <td></td>
+  <td>26.0</td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of OpenDNS (2) [208.67.222.222]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=208.67.220.220" class="info">208.67.220.220</td>
+  <td class="name_cell">OpenDNS</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=" class="info"></a></td>
+  <td>210.06</td>
+  <td></td>
+  <td>29.3</td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of OpenDNS (2) [208.67.222.222]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=208.67.220.222" class="info">208.67.220.222</td>
+  <td class="name_cell">USR7-208.67.220.222</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=resolver4.opendns.com" class="info">resolver4.opendns.com</a></td>
+  <td>212.19</td>
+  <td></td>
+  <td>26.3</td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of OpenDNS (2) [208.67.222.222]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=8.26.56.26" class="info">8.26.56.26</td>
+  <td class="name_cell">USR14-8.26.56.26</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=ns1.recursive.dnsbycomodo.com" class="info">ns1.recursive.dnsbycomodo.com</a></td>
+  <td>247.17</td>
+  <td></td>
+  <td>47.6</td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of USR15-8.20.247.20 [8.20.247.20]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="disabled">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=216.146.35.35" class="info">216.146.35.35<span>unbound 1.6.8</span></td>
+  <td class="name_cell">DynGuide</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=" class="info"></a></td>
+  <td>282.13</td>
+  <td></td>
+  <td>116.8</td>
+  <td></td>
+  <td >0</td>
+  <td></td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>Slower replica of DynGuide (2) [216.146.36.36]</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+</table>
+</div>
+
+
+<h2>Graphs</h2>
+
+<div id="graphs" class="section">
+<h2>Mean Response Duration</h2>
+<img src="http://chart.apis.google.com/chart?chxt=y%2Cx%2Cx&chd=e%3AWQY4Y.ZJbydlgFhiiJiOkYm6nJp43W6t9p9y-0.9&chxp=0%7C2%2C89&chxr=1%2C0%2C200%7C2%2C-10.0%2C210.0&chxtc=1%2C-720&chco=0000ff&chbh=a&chs=720x312&cht=bhg&chxl=0%3A%7CUSR22-9.9.9.9%7CDynGuide%20%282%29%7CUSR9-176.103.130.131%7CUSR8-176.103.130.130%7CUSR27-77.88.8.8%7CUSR26-77.88.8.1%7CUSR31-45.90.30.186%7CUSR24-64.6.64.6%7CUSR25-64.6.65.6%7CUSR23-149.112.112.112%7CUSR20-185.121.177.177%7CUSR15-8.20.247.20%7CUltraDNS%7CUltraDNS%20%282%29%7CUSR30-45.90.28.186%7COpenDNS%20%282%29%7CUSR10-1.1.1.2%7CUSR29-109.247.114.4%7CUSR28-92.220.228.70%7CGoogle%20Public%20DNS%7C1%3A%7C0%7C20%7C40%7C60%7C80%7C100%7C120%7C140%7C160%7C180%7C200%7C2%3A%7CDuration%20in%20ms." alt="Mean Duration Graph" />
+
+<h3>Fastest Individual Response Duration</h3>
+<img src="http://chart.apis.google.com/chart?chxt=y%2Cx%2Cx&chd=e%3AJULkMYMtNLNRPkPkQaRDTYTpW2Y8ZxacgF9L9L9x&chxp=0%7C2%2C54&chxr=1%2C0%2C120%7C2%2C-6.0%2C126.0&chxtc=1%2C-720&chco=0000ff&chbh=a&chs=720x312&cht=bhg&chxl=0%3A%7CUSR9-176.103.130.131%7CDynGuide%20%282%29%7CUSR8-176.103.130.130%7CUSR31-45.90.30.186%7CUSR24-64.6.64.6%7CUSR23-149.112.112.112%7CUSR15-8.20.247.20%7CUSR30-45.90.28.186%7CUSR22-9.9.9.9%7CUltraDNS%7CUSR26-77.88.8.1%7CUSR27-77.88.8.8%7CUSR29-109.247.114.4%7CUSR28-92.220.228.70%7CUSR25-64.6.65.6%7CGoogle%20Public%20DNS%7COpenDNS%20%282%29%7CUltraDNS%20%282%29%7CUSR20-185.121.177.177%7CUSR10-1.1.1.2%7C1%3A%7C0%7C10%7C20%7C30%7C40%7C50%7C60%7C70%7C80%7C90%7C100%7C110%7C120%7C2%3A%7CDuration%20in%20ms." alt="Fastest Response Graph" />
+
+<h3>Response Distribution Chart (First 200ms)</h3>
+
+<img src="http://chart.apis.google.com/chart?cht=lxy&chs=720x415&chxt=x,y&chg=10,20&chxr=0,0,200|1,0,100&chd=t:0,57,60,60,61,62,63,64,66,67,69,73,77,82,93,98,103|0,0,5,10,16,21,24,31,37,42,46,49,54,58,62,66,70|0,12,14,15,16,18,18,19,20,21,24,24,25,26,29,35,37,42,46,61,82,237|0,0,5,9,13,17,24,32,41,49,54,59,64,68,72,76,80,84,88,92,96,99|0,12,13,14,15,16,16,18,21,23,25,27,31,34,38,46,68,80,100|0,0,6,14,24,36,42,46,50,55,62,67,71,74,78,82,85,89,93|0,9,10,11,12,12,13,14,15,16,18,21,26,30,38,46,54,73,96,145|0,0,5,15,24,34,43,47,51,56,60,64,69,73,76,80,83,87,91,95|0,23,25,26,26,27,29,29,31,32,35,37,39,41,42,44,47,50,53,56,62,73,86,99,119|0,0,4,9,14,18,23,26,31,35,39,44,48,52,55,60,64,68,72,76,80,83,87,90,94|0,11,12,13,14,15,17,18,21,23,26,28,31,33,35,41,46,51,61,71,87,104|0,0,7,12,16,23,27,31,36,41,46,50,55,59,64,67,72,76,79,83,87,90|0,18,20,21,21,22,24,25,27,30,32,34,36,40,47,53,63,71,82,97,116|0,0,6,10,15,19,25,32,38,42,47,51,55,59,62,67,70,74,77,81,85|0,24,26,26,27,28,29,29,30,32,33,35,38,41,44,49,55,62,75,94,126|0,0,7,15,22,28,35,40,44,50,54,60,65,69,73,77,80,84,88,91,95|0,25,26,27,28,29,29,30,31,32,34,37,42,46,51,61,69,79,89,105|0,0,5,11,19,26,33,37,44,50,54,59,62,66,70,73,77,80,84,88|0,12,14,15,16,18,18,20,22,27,30,31,33,36,41,45,54,72,83,100|0,0,4,12,18,24,28,32,37,41,46,52,55,60,64,67,71,74,78,82|0,16,17,19,20,21,26,28,30,32,34,36,40,42,44,46,51,57,69,89,102|0,0,7,15,19,24,28,32,36,42,47,52,56,60,65,69,73,76,80,84,87|0,15,17,18,18,20,21,25,28,30,32,34,36,40,42,45,46,53,59,66,88,101|0,0,5,9,14,20,23,27,33,38,42,47,51,55,59,63,67,71,75,78,82,86|0,15,15,16,17,18,18,20,22,24,26,28,31,36,43,60,77,109|0,0,5,19,31,42,48,53,58,63,68,72,76,80,84,87,91,95|0,15,16,17,18,18,20,21,24,25,26,31,37,44,54,69,106|0,0,15,28,41,48,54,59,63,69,72,76,80,83,87,91,94|0,21,23,24,24,25,26,27,28,30,32,36,39,44,50,62,78,102|0,0,11,22,30,39,45,49,55,60,65,70,74,78,82,86,89,93|0,30,32,32,33,34,35,37,41,43,46,49,52,55,60,65,70,82,91,107|0,0,11,20,29,34,38,42,46,50,54,58,62,66,70,74,77,81,85,88|0,57,60,60,61,62,63,63,64,65,66,67,71,74,80,88,98,106|0,0,6,9,17,24,30,34,38,41,45,49,53,57,61,64,68,72|0,58,59,60,61,62,62,63,64,65,66,68,73,76,82,92,100|0,0,6,10,16,21,26,32,37,44,47,52,56,59,63,67,71|0,18,19,20,20,21,22,23,25,26,27,29,31,33,38,41,45,64,85,128|0,0,5,13,23,36,43,48,54,58,62,67,70,74,78,82,86,90,94,97|0,12,13,14,15,15,16,18,19,21,23,27,27,29,30,32,35,39,42,48,65,89,117|0,0,4,10,18,26,30,33,37,41,45,50,54,59,64,69,73,77,80,84,88,91,95&chco=ff9900,1a00ff,ff00e6,80ff00,00e6ff,fae30a,BE81F7,9f5734,000000,ff0000,3090c0,477248f,ababab,7b9f34,00ff00,0000ff,9900ff,405090,051290,f3e000&chxt=x,y,x,y&chxl=2:||Duration+in+ms||3:||%25|&chdl=DynGuide+%282%29|Google+Public+DNS|OpenDNS+%282%29|USR10-1.1.1.2|USR15-8.20.247.20|USR20-185.121.177.177|USR22-9.9.9.9|USR23-149.112.112.112|USR24-64.6.64.6|USR25-64.6.65.6|USR26-77.88.8.1|USR27-77.88.8.8|USR28-92.220.228.70|USR29-109.247.114.4|USR30-45.90.28.186|USR31-45.90.30.186|USR8-176.103.130.130|USR9-176.103.130.131|UltraDNS|UltraDNS+%282%29" alt="Response Distribution Graph (first 200ms)" />
+
+<h3>Response Distribution Chart (Full)</h3>
+
+<img src="http://chart.apis.google.com/chart?cht=lxy&chs=720x415&chxt=x,y&chg=10,20&chxr=0,0,3250|1,0,100&chd=t:0,4,4,4,4,4,4,4,4,4,4,4,5,5,6,6,6,7,7,8,9,10,11,13,18,48|0,0,5,10,16,21,24,31,37,42,46,49,54,58,62,66,70,74,77,81,85,88,92,95,99,100|0,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,4,5,15,44|0,0,5,9,13,17,24,32,41,49,54,59,64,68,72,76,80,84,88,92,96,99,100|0,1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,4,5,6,11,100|0,0,6,14,24,36,42,46,50,55,62,67,71,74,78,82,85,89,93,96,100|0,1,1,1,1,1,1,1,1,1,1,1,2,2,2,3,3,4,6,9,16,58|0,0,5,15,24,34,43,47,51,56,60,64,69,73,76,80,83,87,91,95,98,100|0,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,5,6,7,10,41|0,0,4,9,14,18,23,26,31,35,39,44,48,52,55,60,64,68,72,76,80,83,87,90,94,98,100|0,1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,3,4,4,5,6,9,16,100|0,0,7,12,16,23,27,31,36,41,46,50,55,59,64,67,72,76,79,83,87,90,94,98,100|0,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,4,4,5,6,7,9,11,25,100|0,0,6,10,15,19,25,32,38,42,47,51,55,59,62,67,70,74,77,81,85,88,92,95,100|0,1,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,4,5,6,8,13,100|0,0,7,15,22,28,35,40,44,50,54,60,65,69,73,77,80,84,88,91,95,98,100|0,2,2,2,2,2,2,2,2,2,2,2,3,3,3,4,4,5,5,6,8,10,17,100|0,0,5,11,19,26,33,37,44,50,54,59,62,66,70,73,77,80,84,88,91,95,99,100|0,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,3,4,5,6,7,8,10,13,100|0,0,4,12,18,24,28,32,37,41,46,52,55,60,64,67,71,74,78,82,86,89,93,97,100|0,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,3,4,4,5,6,7,9,80,100|0,0,7,15,19,24,28,32,36,42,47,52,56,60,65,69,73,76,80,84,87,91,95,98,100|0,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,3,4,4,5,6,7,9,14,100|0,0,5,9,14,20,23,27,33,38,42,47,51,55,59,63,67,71,75,78,82,86,89,93,97,100|0,1,1,1,1,1,1,1,1,1,2,2,2,2,3,4,5,7,11,57|0,0,5,19,31,42,48,53,58,63,68,72,76,80,84,87,91,95,98,100|0,1,1,1,1,1,1,1,1,2,2,2,2,3,3,4,7,10,100|0,0,15,28,41,48,54,59,63,69,72,76,80,83,87,91,94,98,100|0,1,1,1,2,2,2,2,2,2,2,2,2,3,3,4,5,6,8,63|0,0,11,22,30,39,45,49,55,60,65,70,74,78,82,86,89,93,97,100|0,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,5,6,7,8,10,21,87|0,0,11,20,29,34,38,42,46,50,54,58,62,66,70,74,77,81,85,88,92,96,99,100|0,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,6,7,7,7,8,9,10,12,14,74|0,0,6,9,17,24,30,34,38,41,45,49,53,57,61,64,68,72,75,79,83,87,90,94,97,100|0,4,4,4,4,4,4,4,4,4,4,4,4,5,5,6,6,7,7,8,8,10,11,13,100|0,0,6,10,16,21,26,32,37,44,47,52,56,59,63,67,71,74,78,82,85,89,93,96,100|0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,4,5,8,100|0,0,5,13,23,36,43,48,54,58,62,67,70,74,78,82,86,90,94,97,100|0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,4,6,7,13,100|0,0,4,10,18,26,30,33,37,41,45,50,54,59,64,69,73,77,80,84,88,91,95,98,100&chco=ff9900,1a00ff,ff00e6,80ff00,00e6ff,fae30a,BE81F7,9f5734,000000,ff0000,3090c0,477248f,ababab,7b9f34,00ff00,0000ff,9900ff,405090,051290,f3e000&chxt=x,y,x,y&chxl=2:||Duration+in+ms||3:||%25|&chdl=DynGuide+%282%29|Google+Public+DNS|OpenDNS+%282%29|USR10-1.1.1.2|USR15-8.20.247.20|USR20-185.121.177.177|USR22-9.9.9.9|USR23-149.112.112.112|USR24-64.6.64.6|USR25-64.6.65.6|USR26-77.88.8.1|USR27-77.88.8.8|USR28-92.220.228.70|USR29-109.247.114.4|USR30-45.90.28.186|USR31-45.90.30.186|USR8-176.103.130.130|USR9-176.103.130.131|UltraDNS|UltraDNS+%282%29" alt="Response Distribution Graph (full)" />
+</div>
+
+
+<h2>Query Details</h2>
+
+<div id="details" class="section">
+View the details in <a href="namebench_2020-04-14_1514.csv">Comma Separated Values (csv)</a> format.
+</div>
+
+
+
+<h2>Configuration</h2>
+
+
+<div id="config" class="section">
+<table id="configtable">
+	<thead><tr><td>Name</td><td>Value</td></tr></thead>
+	
+	  <tr><td>benchmark_thread_count</td><td>2</td></tr>
+	
+	  <tr><td>distance</td><td>1250</td></tr>
+	
+	  <tr><td>health_thread_count</td><td>30</td></tr>
+	
+	  <tr><td>health_timeout</td><td>2.0</td></tr>
+	
+	  <tr><td>hide_results</td><td>0</td></tr>
+	
+	  <tr><td>input_source</td><td>firefox</td></tr>
+	
+	  <tr><td>ipv4_only</td><td>True</td></tr>
+	
+	  <tr><td>max_servers_to_check</td><td>350</td></tr>
+	
+	  <tr><td>num_servers</td><td>11</td></tr>
+	
+	  <tr><td>overload_distance</td><td>250</td></tr>
+	
+	  <tr><td>ping_timeout</td><td>0.5</td></tr>
+	
+	  <tr><td>query_count</td><td>666</td></tr>
+	
+	  <tr><td>run_count</td><td>1</td></tr>
+	
+	  <tr><td>select_mode</td><td>weighted</td></tr>
+	
+	  <tr><td>server_list</td><td>config/servers.csv</td></tr>
+	
+	  <tr><td>skip_health_checks</td><td>False</td></tr>
+	
+	  <tr><td>template</td><td>html</td></tr>
+	
+	  <tr><td>timeout</td><td>3.25</td></tr>
+	
+	  <tr><td>upload_results</td><td>0</td></tr>
+	
+	  <tr><td>version</td><td>1.5-DEVEL</td></tr>
+	
+</table>
+</div>
+
+</div>
+</body>
+</html>
