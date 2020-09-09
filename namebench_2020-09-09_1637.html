@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>namebench: 2020-09-09 16:37:34.678211</title>
+  <style type="text/css">
+    
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #bbb;
+  background-image: -moz-linear-gradient(0% 100% 90deg, #e5e5e5, #666, #e5e5e5 99%);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e5), to(#bbb), color-stop(.1,#666));
+}
+
+
+td {
+  font-size: x-small;
+}
+
+
+#container {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 985px;
+  background-color: #f5f5f5;
+  padding: 0.5em;
+  padding-top: 1px;
+  border: 2px solid #666;
+  border-radius: .6em;
+  -moz-border-radius: .6em;
+  -webkit-border-radius: .6em;
+}
+
+h1 {
+  color: #00CC33;
+  font-size: 75px;
+  text-shadow: 3px 3px #eee;
+  padding-top: 4px;
+  margin: 0;
+}
+
+h2 {
+  padding-top: 1em;
+  clear:  both;
+  font-size: 1em;
+}
+
+h3 {
+  font-size: 0.8em;
+  padding-top:  0;
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+h5.faster {
+  font-size:  30px;
+  font-style: italic;
+  color: #009911;
+  margin: 0;
+  padding-top: 4px;
+}
+
+
+#nsdetails {
+  display: block;
+  background-color:  #C2CFF1;
+  border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
+  padding-left:  3px;
+  padding-bottom: 3px;
+  padding-right:  3px;
+  margin-left: 0.25em;
+}
+
+table#nstable {
+  width:  100%;
+  border-collapse:  collapse;
+  font-size: small;
+}
+
+#nstable tr {
+  vertical-align:  top;
+}
+
+#nstable td {
+  font-size: small;
+}
+
+#nstable td.name_cell {
+  font-size: x-small;
+}
+
+#nstable td.hostname_cell {
+  font-size: x-small;
+}
+
+
+.ip {
+  margin-left: 1em;
+  font-weight: bold;
+  font-family: monospace;
+  border: 1px solid #999;
+  background-color: #f5f5f5;
+  width: 10em;
+  padding: 1px;
+  color: #000;
+}
+
+ul.warnings {
+  padding:  0;
+  margin:  0;
+  margin-left: 0.em;
+  list-style-position:  inside;
+}
+.warnings li {
+}
+#nstable td {
+  padding:  2px;
+  border-right:  1px solid #C2CFF1;
+}
+
+.even {
+  background-color: #fff
+}
+.odd {
+  background-color: #ebeff9;
+}
+
+.unhealthy_host {
+    background-color: #FFD6D8;
+    border-bottom: 1px solid #990000;
+    border-top: 1px solid #990000;
+}
+
+.primary_row {
+  font-weight: bold;
+  background-color: #FFFFEE;
+  border-top: 1px solid #EEEE00;
+  border-bottom: 1px solid #EEEE00;
+}
+
+.disabled {
+  background-color:  #333;
+  border-bottom: 1px solid #666;
+  color: #fff;
+}
+
+.disabled A { 
+  color: #fff;
+}
+
+.disabled A:visited {
+  color: #e5e5e5;
+}
+
+.greybox {
+  border:  1px solid #999;
+  border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
+  padding:  1em;
+  height:  11em;
+  background-color:  #fff;
+}
+
+#big_summary {
+  display: inline-table;
+  float:  left;
+  text-align:  center;
+  width: 24em;
+}
+
+#recommended_config {
+  float: right;
+  display:  inline-table;
+}
+
+#recommended_config table {
+  margin-top: 1em;
+}
+
+#recommended_config td {
+  font-size: medium;
+}
+
+.rec_name {
+  margin-left:  8px;
+  display:  inline;
+  color:  #999;
+}
+
+.section {
+  margin-left: 0.25em;
+  padding: 1em;
+  background-color:  #fff;
+  max-width: 910px;
+}
+
+.config {
+  background-color:  #fff;
+}
+.configtable {
+  font-size: 10px;
+}
+
+.configtable tr {
+  border:  9px solid #f00;
+}
+
+#nstable thead td {
+  font-weight:  bold;
+  font-size: x-small;
+}
+
+h2:before {
+  color:  #555;
+  content:  '\25BA';
+  padding-right:  0.25em;
+}
+
+
+input[type=text] {
+  color: #000;
+}
+
+.normal .error_count {
+  background-color: #900;
+  color: #fff;
+}
+
+.version {
+  text-align: right;
+  font-size: x-small;
+  color: #ccc;
+  clear: both;
+}
+
+/* links with tooltips */
+a.info {
+    position:relative;
+    z-index:24;
+    color: #000;
+    text-decoration:none
+}
+.disabled a.info {
+    color: #fff;
+}
+
+a.info:hover {z-index:25; }
+a.info span {display: none}
+a.info:hover span {
+    display:block;
+    position:absolute;
+    top:2em; left:2em; width:15em;
+    border:1px solid #0cf;
+    background-color:#cff; color:#000;
+    text-align: center
+}
+
+#notice {
+  font-size: small;
+  text-align: center;
+  background-color: #ffa;
+  border: 1px solid #cc7;
+}
+  </style>
+</head>
+<body>
+
+<div id="container">
+
+<div class="version">namebench 1.5-DEVEL</div>
+
+
+<div id="big_summary" class="greybox">
+	<h4><strong>USR0-185.175.56.119</strong> is</h4>
+
+	<h1>31.1%</h1><h5 class="faster">Faster</h5>
+	<h4>than SYS0-192.168.10.11</h4>
+
+</div>
+
+<div id="recommended_config" class="greybox">
+	<h4>Recommended configuration (fastest + nearest)</h4>
+	<table>
+	
+	<tr>
+	  <td>Primary Server</td>
+    <td><div class="ip">185.175.56.119</div></td><td class="rec_name">USR0-185.175.56.119</td>
+	</tr>
+
+	<tr>
+	  <td>Secondary Server</td>
+    <td><div class="ip">192.168.10.11</div></td><td class="rec_name">SYS0-192.168.10.11</td>
+	</tr>
+
+	<tr>
+	  <td>Tertiary Server</td>
+    <td><div class="ip">185.56.187.149</div></td><td class="rec_name">USR6-185.56.187.149</td>
+	</tr>
+
+  </table>
+</div>
+
+
+<h2>Tested DNS Servers</h2>
+
+<div id="nsdetails">
+<table id="nstable">
+<thead>
+<tr>
+  <td nowrap="nowrap">IP</td>
+  <td>Descr.</td>
+  <td nowrap="nowrap">Hostname</td>
+  <td nowrap="nowrap">Avg (ms)</td>
+  <td nowrap="nowrap">Diff</td>
+	<td nowrap="nowrap">Min</td>
+	<td nowrap="nowrap">Max</td>
+  <td nowrap="nowrap">TO</td>
+  <td nowrap="nowrap">NX</td>
+  <td>Notes</td>
+</tr>
+</thead>
+
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=185.175.56.119" class="info">185.175.56.119</td>
+  <td class="name_cell">USR0-185.175.56.119</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=ns3.nasa.gov" class="info">ns3.nasa.gov</a></td>
+  <td>38.88</td>
+  <td>31.1%</td>
+  <td>16.6</td>
+  <td>944.3</td>
+  <td >0</td>
+  <td>30</td>
+  <td class="notes_cell">
+  
+  </td>
+</tr>
+
+<tr class="normal even primary_row">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=192.168.10.11" class="info">192.168.10.11<span>dnsmasq-pi-hole-2.81</span></td>
+  <td class="name_cell">SYS0-192.168.10.11</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns" class="info">dns</a></td>
+  <td>50.99</td>
+  <td></td>
+  <td>1.0</td>
+  <td>5000.0</td>
+  <td class="error_count">3</td>
+  <td>30</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>The current preferred DNS server</li>
+      
+      <li>Assigned by your network DHCP server</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=185.228.168.168" class="info">185.228.168.168<span>CleanBrowsing v1.6a - dns-edge-europe-amsterdam-v</span></td>
+  <td class="name_cell">USR5-185.228.168.168</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=family-filter-dns.cleanbrowsing.org" class="info">family-filter-dns.cleanbrowsing.org</a></td>
+  <td>66.41</td>
+  <td>-23.2%</td>
+  <td>28.5</td>
+  <td>5000.0</td>
+  <td class="error_count">2</td>
+  <td>30</td>
+  <td class="notes_cell">
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=185.222.222.222" class="info">185.222.222.222</td>
+  <td class="name_cell">USR7-185.222.222.222</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=public-dns-a.dns.sb" class="info">public-dns-a.dns.sb</a></td>
+  <td>68.71</td>
+  <td>-25.8%</td>
+  <td>28.4</td>
+  <td>5000.0</td>
+  <td class="error_count">1</td>
+  <td>30</td>
+  <td class="notes_cell">
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=8.8.8.8" class="info">8.8.8.8</td>
+  <td class="name_cell">Google Public DNS</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=" class="info"></a></td>
+  <td>84.81</td>
+  <td>-39.9%</td>
+  <td>16.7</td>
+  <td>5000.0</td>
+  <td class="error_count">5</td>
+  <td>30</td>
+  <td class="notes_cell">
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=84.200.69.80" class="info">84.200.69.80</td>
+  <td class="name_cell">USR8-84.200.69.80</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=84.200.69.80" class="info">84.200.69.80</a></td>
+  <td>117.32</td>
+  <td>-56.5%</td>
+  <td>30.5</td>
+  <td>5000.0</td>
+  <td class="error_count">6</td>
+  <td>30</td>
+  <td class="notes_cell">
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=45.90.28.69" class="info">45.90.28.69</td>
+  <td class="name_cell">USR3-45.90.28.69</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns1.nextdns.io" class="info">dns1.nextdns.io</a></td>
+  <td>135.42</td>
+  <td>-62.4%</td>
+  <td>28.6</td>
+  <td>5000.0</td>
+  <td class="error_count">10</td>
+  <td>30</td>
+  <td class="notes_cell">
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=9.9.9.9" class="info">9.9.9.9<span>Q9-P-6.1</span></td>
+  <td class="name_cell">USR4-9.9.9.9</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns9.quad9.net" class="info">dns9.quad9.net</a></td>
+  <td>143.43</td>
+  <td>-64.5%</td>
+  <td>28.2</td>
+  <td>5000.0</td>
+  <td class="error_count">7</td>
+  <td>30</td>
+  <td class="notes_cell">
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=185.56.187.149" class="info">185.56.187.149<span>9.9.5-3ubuntu0.9-Ubuntu</span></td>
+  <td class="name_cell">USR6-185.56.187.149</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns.piratpartiet.no" class="info">dns.piratpartiet.no</a></td>
+  <td>1757.48</td>
+  <td>-97.1%</td>
+  <td>10.7</td>
+  <td>5000.0</td>
+  <td class="error_count">197</td>
+  <td>20</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>197 of 571 queries failed</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+</table>
+</div>
+
+
+<h2>Graphs</h2>
+
+<div id="graphs" class="section">
+<h2>Mean Response Duration</h2>
+<img src="http://chart.apis.google.com/chart?chxt=y%2Cx%2Cx&chd=e%3ABaB3CbCgDFERE7FO.5&chxp=0%7C2%2C790&chxr=1%2C0%2C1760%7C2%2C-88.0%2C1848.0&chxtc=1%2C-720&chco=0000ff&chbh=a&chs=720x169&cht=bhg&chxl=0%3A%7CUSR6-185.56.187.149%7CUSR4-9.9.9.9%7CUSR3-45.90.28.69%7CUSR8-84.200.69.80%7CGoogle%20Public%20DNS%7CUSR7-185.222.222.222%7CUSR5-185.228.168.168%7CSYS0-192.168.10.11%7CUSR0-185.175.56.119%7C1%3A%7C0%7C160%7C320%7C480%7C640%7C800%7C960%7C1120%7C1280%7C1440%7C1600%7C1760%7C2%3A%7CDuration%20in%20ms." alt="Mean Duration Graph" />
+
+<h3>Fastest Individual Response Duration</h3>
+<img src="http://chart.apis.google.com/chart?chxt=y%2Cx%2Cx&chd=e%3ABwTgeTedziz40L0V3z&chxp=0%7C2%2C15&chxr=1%2C0%2C35%7C2%2C-1.75%2C36.75&chxtc=1%2C-720&chco=0000ff&chbh=a&chs=720x169&cht=bhg&chxl=0%3A%7CUSR8-84.200.69.80%7CUSR3-45.90.28.69%7CUSR5-185.228.168.168%7CUSR7-185.222.222.222%7CUSR4-9.9.9.9%7CGoogle%20Public%20DNS%7CUSR0-185.175.56.119%7CUSR6-185.56.187.149%7CSYS0-192.168.10.11%7C1%3A%7C0%7C3%7C6%7C9%7C12%7C15%7C18%7C21%7C24%7C27%7C30%7C33%7C35%7C2%3A%7CDuration%20in%20ms." alt="Fastest Response Graph" />
+
+<h3>Response Distribution Chart (First 200ms)</h3>
+
+<img src="http://chart.apis.google.com/chart?cht=lxy&chs=720x415&chxt=x,y&chg=10,20&chxr=0,0,200|1,0,100&chd=t:0,0,1,9,13,19,24,30,41,115|0,0,55,76,80,84,87,91,94,98|0,8,9,10,14,14,19,20,22,26,31,34,38,42,77,2500|0,0,12,21,35,57,62,68,72,77,82,85,90,94,97,100|0,8,9,10,12,18,23,27,31,61,99,472|0,0,56,71,74,78,83,86,90,94,98,100|0,14,15,16,17,19,25,29,33,39,56,78,2500|0,0,40,63,68,72,76,80,84,88,92,95,100|0,14,15,16,17,19,20,22,26,29,31,34,39,43,48,52,59,68,79,97,151|0,0,11,25,33,37,42,46,50,55,59,64,68,71,75,79,82,86,90,93,97|0,14,15,16,17,19,21,25,28,34,54,91,2500|0,0,46,62,67,72,77,81,86,90,93,97,100|0,5,6,7,8,8,11,12,16,26,1307|0,0,18,32,38,44,51,55,58,62,65|0,14,15,16,17,19,21,27,31,34,41,57,82,155|0,0,48,62,66,70,73,77,81,84,88,91,95,98|0,15,16,17,18,20,23,27,29,32,34,41,49,60,78,136|0,0,27,52,56,59,64,68,72,76,79,83,86,90,94,97&chco=ff9900,1a00ff,ff00e6,80ff00,00e6ff,fae30a,BE81F7,9f5734,000000&chxt=x,y,x,y&chxl=2:||Duration+in+ms||3:||%25|&chdl=SYS0-192.168.10.11|Google+Public+DNS|USR0-185.175.56.119|USR3-45.90.28.69|USR4-9.9.9.9|USR5-185.228.168.168|USR6-185.56.187.149|USR7-185.222.222.222|USR8-84.200.69.80" alt="Response Distribution Graph (first 200ms)" />
+
+<h3>Response Distribution Chart (Full)</h3>
+
+<img src="http://chart.apis.google.com/chart?cht=lxy&chs=720x415&chxt=x,y&chg=10,20&chxr=0,0,4250|1,0,100&chd=t:0,0,0,0,1,1,1,1,2,5,118|0,0,55,76,80,84,87,91,94,98,100|0,0,0,0,1,1,1,1,1,1,1,2,2,2,4,118|0,0,12,21,35,57,62,68,72,77,82,85,90,94,97,100|0,0,0,0,1,1,1,1,1,3,5,22|0,0,56,71,74,78,83,86,90,94,98,100|0,1,1,1,1,1,1,1,2,2,3,4,118|0,0,40,63,68,72,76,80,84,88,92,95,100|0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,4,5,7,118|0,0,11,25,33,37,42,46,50,55,59,64,68,71,75,79,82,86,90,93,97,100|0,1,1,1,1,1,1,1,1,2,3,4,118|0,0,46,62,67,72,77,81,86,90,93,97,100|0,0,0,0,0,0,0,1,1,1,61,118|0,0,18,32,38,44,51,55,58,62,65,100|0,1,1,1,1,1,1,1,1,2,2,3,4,7,118|0,0,48,62,66,70,73,77,81,84,88,91,95,98,100|0,1,1,1,1,1,1,1,1,1,2,2,2,3,4,6,118|0,0,27,52,56,59,64,68,72,76,79,83,86,90,94,97,100&chco=ff9900,1a00ff,ff00e6,80ff00,00e6ff,fae30a,BE81F7,9f5734,000000&chxt=x,y,x,y&chxl=2:||Duration+in+ms||3:||%25|&chdl=SYS0-192.168.10.11|Google+Public+DNS|USR0-185.175.56.119|USR3-45.90.28.69|USR4-9.9.9.9|USR5-185.228.168.168|USR6-185.56.187.149|USR7-185.222.222.222|USR8-84.200.69.80" alt="Response Distribution Graph (full)" />
+</div>
+
+
+<h2>Query Details</h2>
+
+<div id="details" class="section">
+View the details in <a href="namebench_2020-09-09_1637.csv">Comma Separated Values (csv)</a> format.
+</div>
+
+
+
+<h2>Configuration</h2>
+
+
+<div id="config" class="section">
+<table id="configtable">
+	<thead><tr><td>Name</td><td>Value</td></tr></thead>
+	
+	  <tr><td>benchmark_thread_count</td><td>4</td></tr>
+	
+	  <tr><td>distance</td><td>1250</td></tr>
+	
+	  <tr><td>enable_censorship_checks</td><td>True</td></tr>
+	
+	  <tr><td>health_thread_count</td><td>90</td></tr>
+	
+	  <tr><td>health_timeout</td><td>2.0</td></tr>
+	
+	  <tr><td>hide_results</td><td>0</td></tr>
+	
+	  <tr><td>input_source</td><td>alexano</td></tr>
+	
+	  <tr><td>max_servers_to_check</td><td>350</td></tr>
+	
+	  <tr><td>num_servers</td><td>10</td></tr>
+	
+	  <tr><td>overload_distance</td><td>250</td></tr>
+	
+	  <tr><td>ping_timeout</td><td>0.5</td></tr>
+	
+	  <tr><td>query_count</td><td>570</td></tr>
+	
+	  <tr><td>run_count</td><td>1</td></tr>
+	
+	  <tr><td>select_mode</td><td>automatic</td></tr>
+	
+	  <tr><td>server_list</td><td>config/servers.csv</td></tr>
+	
+	  <tr><td>skip_health_checks</td><td>True</td></tr>
+	
+	  <tr><td>template</td><td>html</td></tr>
+	
+	  <tr><td>timeout</td><td>4.25</td></tr>
+	
+	  <tr><td>upload_results</td><td>0</td></tr>
+	
+	  <tr><td>version</td><td>1.5-DEVEL</td></tr>
+	
+</table>
+</div>
+
+</div>
+</body>
+</html>
